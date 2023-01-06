@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -21,10 +21,26 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
 
+
+
+
+import { environment } from '../environments/environment';
+import { registerLocaleData } from '@angular/common';
+import localFr from '@angular/common/locales/fr';
+import {AngularFireModule } from '@angular/fire/compat';
+import {AngularFireAuthModule } from '@angular/fire/compat/auth';
+import {AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import {AngularFirestoreModule } from '@angular/fire/compat/firestore';
+registerLocaleData(localFr)
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +60,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+  
+    
+
+   
   ],
-  providers: [],
+  providers: [
+    
+    {provide: LOCALE_ID,useValue:'fr-FR' }
+    
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
